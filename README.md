@@ -17,7 +17,7 @@ Referência das Visualizações:
 
 #### 1. Enviar os dados para o hdfs
 
- No terminal ubuntu, criar o diretório em que os arquivos serão baixados e realizar o download e descompactação do arquivo:
+ No terminal Ubuntu, criar o diretório em que os arquivos serão baixados e realizar o download e descompactação do arquivo:
 
 ```
 ~/spark$ cd input
@@ -34,7 +34,7 @@ Para enviar os dados para o hdfs, acessar o container namenode:
 ```
 $ docker exec -it namenode bash
 root@namenode:/# hdfs dfs -mkdir -p /user/aluno/lidia/projeto_spark
-hdfs dfs -put /input/*.csv /user/aluno/lidia/projeto_spark
+root@namenode:/# hdfs dfs -put /input/*.csv /user/aluno/lidia/projeto_spark
 ```
 
 Verificando:
