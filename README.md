@@ -1,6 +1,6 @@
-### Projeto Final de Spark
+### ***Projeto Final de Spark***
 
-#### Campanha Nacional de Vacinação contra Covid-19
+# Campanha Nacional de Vacinação contra Covid-19
 
 
 
@@ -21,7 +21,7 @@ Referência das Visualizações:
 
 3. Criar as 3 vizualizações pelo Spark com os dados enviados para o HDFS:
 
-   ![]()
+   ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe3.PNG)
 
 4. Salvar a primeira visualização como tabela Hive
 
@@ -31,8 +31,8 @@ Referência das Visualizações:
 
 7. Criar a visualização pelo Spark com os dados enviados para o HDFS:
 
-   ![](C:\Users\lidia\Desktop\Projeto Spark\exe7-1626034470666.PNG)
+   ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe7.PNG)
 
 8. Salvar a visualização do exercício 6 em um tópico no Elastic
 
-9. Criar um dashboard no Elastic para visualização dos novos dados enviados# projeto_spark_semantix
+9. Criar um dashboard no Elastic para visualização dos novos dados enviados
