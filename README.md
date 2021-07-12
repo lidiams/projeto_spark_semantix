@@ -28,7 +28,7 @@ Referência das Visualizações:
 
 ```
 
-
+![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe1_1.PNG)
 
 Para enviar os dados para o hdfs:
 
