@@ -30,13 +30,21 @@ Referência das Visualizações:
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe1_1.PNG)
 
-Para enviar os dados para o hdfs:
+Para enviar os dados para o hdfs, acessar o container namenode:
+
+```
+$ docker exec -it namenode bash
+root@namenode:/# hdfs dfs -mkdir -p /user/aluno/lidia/projeto_spark
+hdfs dfs -put /input/*.csv /user/aluno/lidia/projeto_spark
+
+
+
 
 ```
 
-```
+Verificando:
 
-
+![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe1_2.PNG)
 
 #### 2. Otimizar todos os dados do hdfs para uma tabela Hive particionada por município.
 
