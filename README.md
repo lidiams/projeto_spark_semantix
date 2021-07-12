@@ -36,10 +36,6 @@ Para enviar os dados para o hdfs, acessar o container namenode:
 $ docker exec -it namenode bash
 root@namenode:/# hdfs dfs -mkdir -p /user/aluno/lidia/projeto_spark
 hdfs dfs -put /input/*.csv /user/aluno/lidia/projeto_spark
-
-
-
-
 ```
 
 Verificando:
