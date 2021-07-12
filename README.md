@@ -15,7 +15,7 @@ Referência das Visualizações:
 
 
 
-#### 1. Enviar os dados para o hdfs
+### 1. Enviar os dados para o hdfs
 
  No terminal Ubuntu, criar o diretório em que os arquivos serão baixados e realizar o download e descompactação do arquivo:
 
@@ -43,35 +43,54 @@ Verificando:
 
 
 
-#### 2. Otimizar todos os dados do hdfs para uma tabela Hive particionada por município.
+### 2. Otimizar todos os dados do hdfs para uma tabela Hive particionada por município.
 
+Acesse o Jupyter notebook pelo endereço http://localhost:8889/
 
+```
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+```
 
+Leitura dos arquivos:
 
+```
+covid_br = spark.read.csv("/user/aluno/lidia/projeto_spark/*.csv", sep = ";", header = "true").show(5)
+```
 
-#### 3. Criar as 3 vizualizações pelo Spark com os dados enviados para o HDFS:
+Criação das partições, por município:
+
+```
+covid_br.write.mode("overwrite").partitionBy("municipio").saveAsTable("covid_br_municipio")
+```
+
+Visualização no hdfs:
+
+![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe2_1.PNG)
+
+### 3. Criar as 3 vizualizações pelo Spark com os dados enviados para o HDFS:
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe3.PNG)
 
-#### 4. Salvar a primeira visualização como tabela Hive
+### 4. Salvar a primeira visualização como tabela Hive
 
 
 
 
 
-#### 5. Salvar a segunda visualização com formato parquet e compressão snappy
+### 5. Salvar a segunda visualização com formato parquet e compressão snappy
 
 
 
 
 
-#### 6. Salvar a terceira visualização em um tópico no Kafka
+### 6. Salvar a terceira visualização em um tópico no Kafka
 
 
 
 
 
-#### 7. Criar a visualização pelo Spark com os dados enviados para o HDFS:
+### 7. Criar a visualização pelo Spark com os dados enviados para o HDFS:
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe7.PNG)
 
@@ -79,10 +98,10 @@ Verificando:
 
 
 
-#### 8. Salvar a visualização do exercício 6 em um tópico no Elastic
+### 8. Salvar a visualização do exercício 6 em um tópico no Elastic
 
 
 
 
 
-#### 9. Criar um dashboard no Elastic para visualização dos novos dados enviados
+### 9. Criar um dashboard no Elastic para visualização dos novos dados enviados
