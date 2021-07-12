@@ -25,7 +25,6 @@ Referência das Visualizações:
 ~/spark/input$ sudo curl -O https://mobileapps.saude.gov.br/esus-vepi/files/unAFkcaNDeXajurGB7LChj8SgQYS2ptm/04bd3419b22b9cc5c6efac2c6528100d_HIST_PAINEL_COVIDBR_06jul2021.rar
 
 ~/spark/input$ unrar x 04bd3419b22b9cc5c6efac2c6528100d_HIST_PAINEL_COVIDBR_06jul2021.rar 
-
 ```
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe1_1.PNG)
@@ -41,6 +40,8 @@ hdfs dfs -put /input/*.csv /user/aluno/lidia/projeto_spark
 Verificando:
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe1_2.PNG)
+
+
 
 #### 2. Otimizar todos os dados do hdfs para uma tabela Hive particionada por município.
 
