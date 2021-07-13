@@ -43,7 +43,7 @@ Verificando:
 
 
 
-##### Obs: A partir do exercício 2 até o exercício 8, a resolução também está disponível no arquivo [projeto_spark_basico.ipynb](https://github.com/lidiams/projeto_spark_semantix/blob/main/projeto_spark_basico.ipynb)
+##### Obs: A partir do exercício 2 até o exercício 8, as resoluções também estão disponíveis no arquivo [projeto_spark_basico.ipynb](https://github.com/lidiams/projeto_spark_semantix/blob/main/projeto_spark_basico.ipynb)
 
 
 
