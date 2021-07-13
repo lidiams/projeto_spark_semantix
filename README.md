@@ -43,6 +43,10 @@ Verificando:
 
 
 
+##### Obs: A partir do exercício 2 até o exercício 8, a resolução também está disponível no arquivo [projeto_spark_basico.ipynb](https://github.com/lidiams/projeto_spark_semantix/blob/main/projeto_spark_basico.ipynb)
+
+
+
 ### 2. Otimizar todos os dados do hdfs para uma tabela Hive particionada por município.
 
 Acesse o Jupyter notebook pelo endereço http://localhost:8889/
