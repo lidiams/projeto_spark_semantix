@@ -186,6 +186,8 @@ obitos_visualizacao.selectExpr("CAST(regiao AS STRING)", "CAST(data AS STRING)",
 
 ### 7. Criar a visualização pelo Spark com os dados enviados para o HDFS:
 
+![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe7.PNG)
+
 ```
 sintese_casos = covid_br.withColumn("casos_acumulados", col("casosAcumulado").cast(IntegerType()))\
 .withColumn("obitos_acumulados", col("obitosAcumulado").cast(IntegerType()))\
