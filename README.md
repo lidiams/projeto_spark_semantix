@@ -138,12 +138,12 @@ obitos_visualizacao = obitos.groupBy("regiao", "data")\
      , format_number(sum("obitos_novos"), 0).alias("obitos_novos")\
      , format_number(sum("letalidade"), 1).alias("letalidade")\
      , format_number(sum("mortalidade"), 1).alias("mortalidade"))\
-.where(col("regiao") == "Brasil").where(col("data") == "2021-07-06")
+.where(col("data") == "2021-07-06")
 ```
 
 ```
 print("OBITOS CONFIRMADOS")
-obitos_visualizacao.select(col("obitos_acumulados"), col("obitos_novos"), col("letalidade"), col("mortalidade")).show()
+obitos_visualizacao.select(col("obitos_acumulados"), col("obitos_novos"), col("letalidade"), col("mortalidade")).where(col("regiao") == "Brasil").show()
 ```
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe3_3.PNG)
