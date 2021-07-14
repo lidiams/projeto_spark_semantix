@@ -173,14 +173,11 @@ confirmados_visualizacao.write.parquet("/user/aluno/lidia/projeto_spark/confirma
 ### 6. Salvar a terceira visualização em um tópico no Kafka
 
 ```
-obitos_visualizacao.selectExpr("CAST(regiao AS STRING)", "CAST(data AS STRING)",\
-                               "CAST(obitos_acumulados AS STRING)", "CAST(obitos_novos AS STRING)",\
-                               "CAST(letalidade AS STRING)", "CAST(mortalidade AS STRING)")\
-.withColumn("value", col("regiao"))\
+obitos_visualizacao.selectExpr("CAST(regiao AS STRING) AS key", "to_json(struct(*)) AS value")\
 .write\
 .format("kafka") \
 .option("kafka.bootstrap.servers", "kafka:9092")\
-.option("topic","obitos_vis") \
+.option("topic","obitos_vi") \
 .save()
 ```
 
