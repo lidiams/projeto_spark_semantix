@@ -82,14 +82,14 @@ Visualização no hdfs:
 
 ```
 recuperados = covid_br.withColumn("casos_recuperados", col("Recuperadosnovos").cast(IntegerType()))\
-.withColumn("recuperados_em_acompanhamento", col("emAcompanhamentoNovos").cast(IntegerType()))
+    .withColumn("recuperados_em_acompanhamento", col("emAcompanhamentoNovos").cast(IntegerType()))
 ```
 
 ```
 recuperados_visualizacao = recuperados.groupBy("regiao", "data")\
-.agg(sum("casos_recuperados").alias("casos_recuperados"),\
-     sum("recuperados_em_acompanhamento").alias("em_acompanhamento"))\
-.where(col("regiao") == "Brasil").where(col("data") == "2021-07-06")
+    .agg(sum("casos_recuperados").alias("casos_recuperados"),\
+    sum("recuperados_em_acompanhamento").alias("em_acompanhamento"))\
+    .where(col("regiao") == "Brasil").where(col("data") == "2021-07-06")
 ```
 
 ```
@@ -104,16 +104,16 @@ recuperados_visualizacao.select(col("casos_recuperados"), col("em_acompanhamento
 
 ```
 confirmados = covid_br.withColumn("casos_acumulados", col("casosAcumulado").cast(IntegerType()))\
-.withColumn("casos_novos", col("casosNovos").cast(IntegerType()))\
-.withColumn("incidencia", col("casosAcumulado")/(col("populacaoTCU2019")/100000).cast(FloatType()))
+    .withColumn("casos_novos", col("casosNovos").cast(IntegerType()))\
+    .withColumn("incidencia", col("casosAcumulado")/(col("populacaoTCU2019")/100000).cast(FloatType()))
 ```
 
 ```
 confirmados_visualizacao = confirmados.groupBy("regiao", "data")\
-.agg(format_number(sum("casos_acumulados"), 0).alias("casos_acumulados")\
-     , format_number(sum("casos_novos"), 0).alias("casos_novos")\
-     , format_number(sum("incidencia"), 1).alias("incidencia"))\
-.where(col("regiao") == "Brasil").where(col("data") == "2021-07-06")
+    .agg(format_number(sum("casos_acumulados"), 0).alias("casos_acumulados")\
+    , format_number(sum("casos_novos"), 0).alias("casos_novos")\
+    , format_number(sum("incidencia"), 1).alias("incidencia"))\
+    .where(col("regiao") == "Brasil").where(col("data") == "2021-07-06")
 ```
 
 ```
@@ -126,24 +126,28 @@ confirmados_visualizacao.select(col("casos_acumulados"), col("casos_novos"), col
 #### Visualização 3
 
 ```
-obitos = covid_br.withColumn("obitos_acumulados", col("obitosAcumulado").cast(IntegerType()))\
-.withColumn("obitos_novos", col("obitosNovos").cast(IntegerType()))\
-.withColumn("letalidade", ((col("obitos_acumulados")/col("casosAcumulado"))*100).cast(FloatType()))\
-.withColumn("mortalidade", col("obitos_acumulados")/(col("populacaoTCU2019")/100000).cast(FloatType()))
+obitos = covid_br.withColumn("obitos_acumulados", col("obitosAcumulado"))\
+    .withColumn("obitos_novos", col("obitosNovos"))\
+    .withColumn("letalidade", ((col("obitos_acumulados")/col("casosAcumulado"))*100))\
+    .withColumn("mortalidade", col("obitos_acumulados")/(col("populacaoTCU2019")/100000))
 ```
 
 ```
 obitos_visualizacao = obitos.groupBy("regiao", "data")\
-.agg(format_number(sum("obitos_acumulados"), 0).alias("obitos_acumulados")\
-     , format_number(sum("obitos_novos"), 0).alias("obitos_novos")\
-     , format_number(sum("letalidade"), 1).alias("letalidade")\
-     , format_number(sum("mortalidade"), 1).alias("mortalidade"))\
-.where(col("data") == "2021-07-06")
+    .agg(sum("obitos_acumulados").cast(IntegerType()).alias("obitos_acumulados")\
+    , sum("obitos_novos").cast(IntegerType()).alias("obitos_novos")\
+    , sum("letalidade").cast(FloatType()).alias("letalidade")\
+    , sum("mortalidade").cast(FloatType()).alias("mortalidade"))\
+    .where(col("data") == "2021-07-06")
 ```
 
 ```
-print("OBITOS CONFIRMADOS")
-obitos_visualizacao.select(col("obitos_acumulados"), col("obitos_novos"), col("letalidade"), col("mortalidade")).where(col("regiao") == "Brasil").show()
+print("ÓBITOS CONFIRMADOS")
+obitos_visualizacao.select(format_number(col("obitos_acumulados"), 0).alias("obitos_acumulados")\
+    , format_number(col("obitos_novos"), 0).alias("obitos_novos")\
+    , format_number(col("letalidade"), 1).alias("letalidade")\
+    , format_number(col("mortalidade"), 1).alias("mortalidade"))\
+    .where(col("regiao") == "Brasil").show()
 ```
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe3_3.PNG)
@@ -174,11 +178,11 @@ confirmados_visualizacao.write.parquet("/user/aluno/lidia/projeto_spark/confirma
 
 ```
 obitos_visualizacao.selectExpr("CAST(regiao AS STRING) AS key", "to_json(struct(*)) AS value")\
-.write\
-.format("kafka") \
-.option("kafka.bootstrap.servers", "kafka:9092")\
-.option("topic","obitos_vi") \
-.save()
+    .write\
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "kafka:9092")\
+    .option("topic","obitos_vi") \
+    .save()
 ```
 
 ![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe6_1.PNG)
@@ -191,22 +195,22 @@ obitos_visualizacao.selectExpr("CAST(regiao AS STRING) AS key", "to_json(struct(
 
 ```
 sintese_casos = covid_br.withColumn("casos_acumulados", col("casosAcumulado").cast(IntegerType()))\
-.withColumn("obitos_acumulados", col("obitosAcumulado").cast(IntegerType()))\
-.withColumn("populacao", col("populacaoTCU2019").cast(IntegerType()))\
+    .withColumn("obitos_acumulados", col("obitosAcumulado").cast(IntegerType()))\
+    .withColumn("populacao", col("populacaoTCU2019").cast(IntegerType()))\
 ```
 
 ```
 sintese_visualizacao = sintese_casos.groupBy("data", "regiao", "codmun")\
-.agg(format_number(sum("casos_acumulados"), 0).alias("casos")\
-     , format_number(sum("obitos_acumulados"), 0).alias("obitos")\
-     , format_number(sum("populacao"), 0).alias("populacao")\
-     , format_number((sum("casos_acumulados")/(sum("populacao") / 100000)), 1).alias("incidencia")\
-     , format_number((sum("obitos_acumulados")/(sum("populacao") / 100000)), 1).alias("mortalidade"))\
-.where(col("codmun").isNull()).where(col("data") == "2021-07-06")\
+    .agg(format_number(sum("casos_acumulados"), 0).alias("casos")\
+    , format_number(sum("obitos_acumulados"), 0).alias("obitos")\
+    , format_number(sum("populacao"), 0).alias("populacao")\
+    , format_number((sum("casos_acumulados")/(sum("populacao") / 100000)), 1).alias("incidencia")\
+    , format_number((sum("obitos_acumulados")/(sum("populacao") / 100000)), 1).alias("mortalidade"))\
+    .where(col("codmun").isNull()).where(col("data") == "2021-07-06")\
 ```
 
 ```
-print("Sintese de casos, obitos, incidencia e mortalidade")
+print("Síntese de casos, óbitos, incidência e mortalidade")
 sintese_visualizacao.select(col("regiao"), col("casos"), col("obitos"), col("incidencia"), col("mortalidade"), col("data")).show()
 ```
 
@@ -216,11 +220,32 @@ sintese_visualizacao.select(col("regiao"), col("casos"), col("obitos"), col("inc
 
 ### 8. Salvar a visualização do exercício 6 em um tópico no Elastic
 
-*** em andamento ***
+```
+obitos_elastic = obitos_visualizacao.where(col("regiao") == "Brasil")
+```
+
+```
+from elasticsearch import Elasticsearch
+```
+
+```
+es = Elasticsearch("host.docker.internal:9200")
+```
+
+```
+obitos_elastic.write.format("org.elasticsearch.spark.sql")\
+    .option("es.nodes", "host.docker.internal")\
+    .option("es.port", "9200")\
+    .option("es.resource", "obitos_elastic")\
+    .option("es.nodes.wan.only", "true")\
+    .save()
+```
+
+![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe8.PNG)
 
 
 
 ### 9. Criar um dashboard no Elastic para visualização dos novos dados enviados
 
-*** em andamento ***
+![](https://github.com/lidiams/projeto_spark_semantix/blob/main/images/exe9.PNG)
 
